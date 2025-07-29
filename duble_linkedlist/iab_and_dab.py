@@ -14,13 +14,19 @@ class DoublyLinkedList:
         if self.head:
             self.head.prev=newnode
         self.head=newnode
-    def deb(self):
+    def dae(self):
         if not self.head:
             print("cant perform delet in an empty")
-        print(f"Deleted:{self.head.data}")
-        self.head =self.head.next
-        if self.head:
-            self.head.prev=None
+            return
+        temp = self.head
+        while temp.next:
+            temp=temp.next
+        print(f"Deleted :{temp.data}")
+        if temp.prev:
+            temp.prev.next=None
+        else:
+            self.head=None
+            
 
     def backtraverse(self):
         print("values for traversing backward....")
@@ -52,6 +58,6 @@ for i in range(n):
     val=int(input(f"Enter element {i + 1}: "))
     dll.iab(val)
 dll.display()
-d=int(input())
+
 dll.backtraverse()
 
