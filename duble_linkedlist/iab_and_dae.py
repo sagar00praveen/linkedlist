@@ -8,12 +8,16 @@ class Node:
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
-    def iab(self,data):
+    def iae(self,data):
         newnode=Node(data)
-        newnode.next=self.head
-        if self.head:
-            self.head.prev=newnode
-        self.head=newnode
+        if not self.head:
+            self.head=newnode
+            return
+        temp=self.head
+        while temp.next:
+            temp=temp.next
+        temp.next=newnode
+        newnode.prev=temp
     def dae(self):
         if not self.head:
             print("cant perform delet in an empty")
@@ -26,7 +30,6 @@ class DoublyLinkedList:
             temp.prev.next=None
         else:
             self.head=None
-            
 
     def backtraverse(self):
         print("values for traversing backward....")
@@ -58,6 +61,6 @@ for i in range(n):
     val=int(input(f"Enter element {i + 1}: "))
     dll.iab(val)
 dll.display()
-
+d=int(input())
 dll.backtraverse()
 
