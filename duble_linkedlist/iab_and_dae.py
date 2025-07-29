@@ -1,4 +1,3 @@
-
 class Node:
     def __init__(self, data):
         self.data = data
@@ -8,59 +7,46 @@ class Node:
 class DoublyLinkedList:
     def __init__(self):
         self.head = None
-    def iae(self,data):
-        newnode=Node(data)
-        if not self.head:
-            self.head=newnode
-            return
-        temp=self.head
-        while temp.next:
-            temp=temp.next
-        temp.next=newnode
-        newnode.prev=temp
+
+    def iab(self, data):
+        newnode = Node(data)
+        newnode.next = self.head
+        if self.head:
+            self.head.prev = newnode
+        self.head = newnode
+
     def dae(self):
         if not self.head:
-            print("cant perform delet in an empty")
+            print("Cannot delete from an empty list...")
+            return
+        if not self.head.next:
+            print(f"Deleted: {self.head.data}")
+            self.head = None
             return
         temp = self.head
         while temp.next:
-            temp=temp.next
-        print(f"Deleted :{temp.data}")
-        if temp.prev:
-            temp.prev.next=None
-        else:
-            self.head=None
-
-    def backtraverse(self):
-        print("values for traversing backward....")
-        temp=self.head
-        if not temp:
-            print("empty list")
-            return
-        while temp.next:
-            temp=temp.next
-        while temp:
-            print(temp.data,end="<-->")
-            temp = temp.prev
-        print("None")    
-
-
-   
+            temp = temp.next
+        print(f"Deleted: {temp.data}")
+        temp.prev.next = None
 
     def display(self):
-        temp=self.head
-        print("Doubly Linked List:")
+        temp = self.head
+        print("Doubly linked list:")
         while temp:
-            print(temp.data, end="<->")
-            temp=temp.next
+            print(temp.data, end="<-->")
+            temp = temp.next
         print("None")
 
-dll=DoublyLinkedList()
-n= int(input("Enter the number of elements to insert at begin: "))
+dll = DoublyLinkedList()
+n = int(input("Enter the number of elements to insert at beginning: "))
 for i in range(n):
-    val=int(input(f"Enter element {i + 1}: "))
+    val = int(input(f"Enter element {i+1}: "))
     dll.iab(val)
-dll.display()
-d=int(input())
-dll.backtraverse()
 
+dll.display()
+
+d = int(input("\nHow many times do you want to delete from end? "))
+for i in range(d):
+    dll.dae()
+
+dll.display()
